@@ -106,7 +106,7 @@ services:
   webserver:
     image: apache/airflow:2.6.0-python3.9
     command: webserver
-    entrypoint: ['/opt/airflow/script/entrypoint.sh']
+    entrypoint: ["/opt/airflow/script/entrypoint.sh"]
     depends_on:
       - postgres
     environment:
@@ -125,13 +125,12 @@ services:
     ports:
       - "8080:8080"
     healthcheck:
-      test: ['CMD-SHELL', "[ -f /opt/airflow/airflow-webserver.pid ]"]
+      test: ["CMD-SHELL", "[ -f /opt/airflow/airflow-webserver.pid ]"]
       interval: 30s
       timeout: 30s
       retries: 3
     networks:
       - confluent
-
 
   scheduler:
     image: apache/airflow:2.6.0-python3.9
@@ -150,7 +149,6 @@ services:
     command: bash -c "pip install -r ./requirements.txt && airflow db upgrade && airflow scheduler"
     networks:
       - confluent
-
 
   postgres:
     image: postgres:14.0
